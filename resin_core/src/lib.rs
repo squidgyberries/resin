@@ -1,7 +1,7 @@
 mod resin;
 mod util;
 
-use std::{fs::File, io::{BufReader, BufWriter, Write}};
+use std::{fs::{File, create_dir_all}, io::{BufReader, BufWriter, Write}};
 
 use crate::resin::resin::Resin;
 
@@ -25,6 +25,12 @@ pub fn thing() {
                 print!("{:X} ", j);
             }
             println!("");
+            let path_split: Vec<&str> = i.path.split("/").collect();
+            let mut folders = String::new();
+            for i in 0..path_split.len() - 1 {
+                folders.push_str(&format!("{}/", path_split[i]));
+            }
+            create_dir_all(folders).expect("Unable to create directory");
             let file = File::create(i.path).expect("Unable to create file.");
             let mut writer = BufWriter::new(file);
             writer.write_all(&i.data).expect("Unable to write to file.");
