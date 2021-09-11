@@ -1,7 +1,10 @@
 mod resin;
 mod util;
 
-use std::{fs::{File, create_dir_all}, io::{BufReader, BufWriter, Write}};
+use std::{
+    fs::{create_dir_all, File},
+    io::{BufReader, BufWriter, Write},
+};
 
 use crate::resin::resin::Resin;
 
